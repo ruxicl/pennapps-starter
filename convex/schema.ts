@@ -9,5 +9,12 @@ export default defineSchema({
   counters: defineTable({
     name: s.string(),
     counter: s.number(),
+  }),
+
+  freeItems: defineTable({
+    nameOfItem: s.string(),
+    latitude: s.number(),
+    longitude: s.number(),
   })
+
 });
