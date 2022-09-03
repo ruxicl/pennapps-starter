@@ -10,9 +10,11 @@
  */
 
 import type getCounter from "../getCounter";
+import type getFreeItems from "../getFreeItems";
 import type incrementCounter from "../incrementCounter";
 import type listMessages from "../listMessages";
 import type sendMessage from "../sendMessage";
+import type submitFreeItem from "../submitFreeItem";
 import type { OptimisticLocalStore as GenericOptimisticLocalStore } from "convex/browser";
 import type { ClientMutation, ClientQuery } from "convex/server";
 
@@ -28,11 +30,13 @@ import type { ClientMutation, ClientQuery } from "convex/server";
 export type ConvexAPI = {
   queries: {
     getCounter: ClientQuery<typeof getCounter>;
+    getFreeItems: ClientQuery<typeof getFreeItems>;
     listMessages: ClientQuery<typeof listMessages>;
   };
   mutations: {
     incrementCounter: ClientMutation<typeof incrementCounter>;
     sendMessage: ClientMutation<typeof sendMessage>;
+    submitFreeItem: ClientMutation<typeof submitFreeItem>;
   };
 };
 
