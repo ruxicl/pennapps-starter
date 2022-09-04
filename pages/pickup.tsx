@@ -4,7 +4,7 @@ const TestFunction = () => {
 
     const freeItems = useQuery("getFreeItems") || [];
 
-    return <div> {DisplayHeader()}
+    return <div className="container"> {DisplayHeader()}
     <div>
     {freeItems.map(f => <div className="bs-button" key={f._id.toString()} style={{backgroundColor: 'lightgreen'}}>{f.nameOfItem}</div>)}
     </div></div>

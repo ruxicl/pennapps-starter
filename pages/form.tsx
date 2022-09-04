@@ -2,20 +2,22 @@ import { useMutation, useQuery } from "../convex/_generated/react"
 import React from 'react';
 import { useFormik } from 'formik';
 
-const TestFunction = () => {
+const submitItem = () => {
+    alert("hjh")
     const submitFreeItem = useMutation("submitFreeItem")
+    submitFreeItem("ss", 2, 2)
+    alert("Done")
+}
+
+const TestFunction = () => {
+
 
     const freeItems = useQuery("getFreeItems") || [];
     const header = DisplayHeader();
-
-    const miniFunction = () => {
-        // console.log("Hey hey")
-        submitFreeItem("test", 5, 6)
-    }
+    const form = SignupForm();
 
     return <div> {DisplayHeader()}
-    {SignupForm()}
-    <a className="btn btn-primary" onClick={miniFunction} role="button" style={{backgroundColor: 'green'}}>Submit Form</a>
+    {form}
     </div>
 }
 
@@ -31,21 +33,24 @@ const DisplayHeader = () => {
 export default TestFunction
 
 const SignupForm = () => {
-  // Note that we have to initialize ALL of fields with values. These
-  // could come from props, but since we don’t want to prefill this form,
-  // we just use an empty string. If we don’t do this, React will yell
-  // at us.
+
+    const submitFreeItem = useMutation("submitFreeItem")
+
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
-      lastName: '',
-      email: '',
+      lastName: 0,
+      email: 0,
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+        submitFreeItem(values.firstName, values.lastName, values.email)
+        formik.resetForm();
     },
   });
+
   return (
+    <div className="container">
     <form onSubmit={formik.handleSubmit}>
       <label htmlFor="firstName">First Name</label>
       <input
@@ -60,7 +65,7 @@ const SignupForm = () => {
       <input
         id="lastName"
         name="lastName"
-        type="text"
+        type="number"
         onChange={formik.handleChange}
         value={formik.values.lastName}
       />
@@ -69,12 +74,13 @@ const SignupForm = () => {
       <input
         id="email"
         name="email"
-        type="email"
+        type="number"
         onChange={formik.handleChange}
         value={formik.values.email}
       />
 
-      <button type="submit">Submit</button>
+      <button type="submit" className="btn btn-primary" style={{backgroundColor: 'green'}}>Submit</button>
     </form>
+    </div>
   );
 };
