@@ -27,7 +27,7 @@ const Home = () => {
         To test the website:
         <ul>
           <li>Go to the <a href="/form"> "Drop Item" page</a> and fill out the form </li> 
-          <li>Go to the <a href="/pickup"> "Pickup" page</a>and see the item you just added! </li>
+          <li>Go to the <a href="/pickup"> "Pickup" page</a> and see the item you just added! </li>
           <li>You can book any item on the list. Click "collected" when you collect the item(s).</li>
           </ul>
     </div>
