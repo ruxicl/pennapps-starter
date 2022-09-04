@@ -47,7 +47,7 @@ const SignupForm = () => {
       email: Yup.string().email('Invalid email address'),
     }),
     onSubmit: values => {
-        submitFreeItem(values.boxDescription, values.location, values.email)
+        submitFreeItem(values.boxDescription, values.location, 0)
         formik.resetForm();
     },
   });
