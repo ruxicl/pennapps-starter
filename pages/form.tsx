@@ -3,13 +3,6 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-const submitItem = () => {
-    alert("hjh")
-    const submitFreeItem = useMutation("submitFreeItem")
-    submitFreeItem("ss", 2, 2)
-    alert("Done")
-}
-
 const TestFunction = () => {
     const freeItems = useQuery("getFreeItems") || [];
     const header = DisplayHeader();
@@ -34,12 +27,11 @@ export default TestFunction
 const SignupForm = () => {
   const submitFreeItem = useMutation("submitFreeItem")
 
-
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: 0,
-      email: 0,
+      boxDescription: '',
+      location: '',
+      email: '',
     },
     validationSchema: Yup.object({
       boxDescription: Yup.string()
@@ -51,7 +43,7 @@ const SignupForm = () => {
       email: Yup.string().email('Invalid email address'),
     }),
     onSubmit: values => {
-        submitFreeItem(values.firstName, values.lastName, values.email)
+        submitFreeItem(values.boxDescription, values.location, values.email)
         formik.resetForm();
     },
   });
@@ -89,7 +81,7 @@ const SignupForm = () => {
       <input
         id="email"
         name="email"
-        type="number"
+        type="email"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.email}
