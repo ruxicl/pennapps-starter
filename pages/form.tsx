@@ -6,13 +6,10 @@ import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
 import { map } from "lodash";
 
 const TestFunction = () => {
-    const freeItems = useQuery("getFreeItems") || [];
-    const header = DisplayHeader();
-    const form = SignupForm();
+    const submitFreeItem = useMutation("submitFreeItem")
 
     return <div> {DisplayHeader()}
-    {form}
-    {AddNewItems()}
+    {AddNewItems(submitFreeItem)}
     </div>
 }
 
@@ -27,111 +24,6 @@ const DisplayHeader = () => {
 
 export default TestFunction
 
-const SignupForm = () => {
-  const submitFreeItem = useMutation("submitFreeItem")
-
-  const formik = useFormik({
-    initialValues: {
-      boxDescription: '',
-      location: '',
-      nrOfLightbulbs: 0,
-      nrOfBatteries: 0,
-      email: '',
-    },
-    validationSchema: Yup.object({
-      boxDescription: Yup.string()
-        .min(5, 'Must be 5 characters or more')
-        .required('Required'),
-      location: Yup.string()
-        .max(20, 'Must be 20 characters or less')
-        .required('Required'),
-      nrOfLightbulbs: Yup.string()
-        .max(50, 'Sorry, you reached the maximum number'),
-      nrOfBatteries: Yup.string()
-        .max(50, 'Sorry, you reached the maximum number'),
-      email: Yup.string().email('Invalid email address'),
-    }),
-    onSubmit: values => {
-        submitFreeItem(values.boxDescription, values.location, values.nrOfLightbulbs, values.email)
-        formik.resetForm();
-    },
-  });
-
-  return (
-    <div className="container">
-    <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="boxDescription">Box description</label>
-      <input
-        id="boxDescription"
-        name="boxDescription"
-        type="text"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.boxDescription}
-      />
-      {formik.touched.boxDescription && formik.errors.boxDescription ? (
-        <div>{formik.errors.boxDescription}</div>
-      ) : null}
-
-      <label htmlFor="nrOfLightbulbs">Number of lightbulbs</label>
-      <input
-        id="nrOfLightbulbs"
-        name="nrOfLightbulbs"
-        type="number"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.nrOfLightbulbs}
-      />
-      {formik.touched.nrOfLightbulbs && formik.errors.nrOfLightbulbs ? (
-        <div>{formik.errors.nrOfLightbulbs}</div>
-      ) : null}
-
-    <label htmlFor="nrOfBatteries">Number of batteries</label>
-      <input
-        id="nrOfBatteries"
-        name="nrOfBatteries"
-        type="number"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.nrOfBatteries}
-      />
-      {formik.touched.nrOfBatteries && formik.errors.nrOfBatteries ? (
-        <div>{formik.errors.nrOfBatteries}</div>
-      ) : null}
-
-      <label htmlFor="location">Location</label>
-      <input
-        id="location"
-        name="location"
-        type="text"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.location}
-      />
-      {formik.touched.location && formik.errors.location ? (
-        <div>{formik.errors.location}</div>
-      ) : null}
-
-      <label htmlFor="email">Email Address</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.email}
-      />
-      {formik.touched.email && formik.errors.email ? (
-        <div>{formik.errors.email}</div>
-      ) : null}
-
-      <button type="submit" className="btn btn-primary" style={{backgroundColor: 'green'}}>Submit</button>
-    </form>
-    </div>
-  );
-};
-
-
 const initialValues = {
   items: [
     {
@@ -141,16 +33,21 @@ const initialValues = {
   ],
 };
 
-const AddNewItems = () => (
-  <div>
+const AddNewItems = (submitFreeItem) => (
+    
+<div className="container">
     <p>Add the items you want to dispose of and the corresponding quantities</p>
     <Formik
       initialValues={initialValues}
-      onSubmit={async (values) => {
+      onSubmit={async (values, { resetForm }) => {
+        
         await new Promise((r) => setTimeout(r, 500));
-        var title = '';
-        map(values["items"], p => title = title + "| " + p["name"] + ": " + p["quantity"] + " ")
-        alert(title)
+        var title = 'Box with: ';
+        map(values["items"], p => {if (p["quantity"]>0 && p["name"]!="") { title = title + p["quantity"] + " " + p["name"] + ","}})
+        title = title.substring(0, title.length - 1);
+
+        if (title != 'Box with:') {submitFreeItem(title, 2, 2)}
+        resetForm();
       }}
     >
       {({ values }) => (
@@ -162,7 +59,8 @@ const AddNewItems = () => (
                   values.items.map((item, index) => (
                     <div className="row" key={index}>
                       <div className="col">
-                        <label htmlFor={`items.${index}.name`}>Item</label>
+                        <label htmlFor={`items.${index}.name`}>Item </label>
+                        &nbsp;&nbsp;
                         <Field component="select" name={`items.${index}.name`}>
                             <option value=""></option>
                             <option value="batteries">Batteries</option>
@@ -170,7 +68,7 @@ const AddNewItems = () => (
                             <option value="smartphones">Smartphones</option>
                             <option value="laptops">Laptops</option>
                             <option value="appliances">Appliancess</option>
-                          placeholder="Choose the item"
+                          placeholder="Choose the item "
                           type="text"
                         </Field>
                         <ErrorMessage
@@ -181,6 +79,7 @@ const AddNewItems = () => (
                       </div>
                       <div className="col">
                         <label htmlFor={`items.${index}.quantity`}>Quantity</label>
+                        &nbsp;&nbsp;
                         <Field
                           name={`items.${index}.quantity`}
                           placeholder="Insert"
@@ -197,6 +96,7 @@ const AddNewItems = () => (
                           type="button"
                           className="secondary"
                           onClick={() => remove(index)}
+                          style={{backgroundColor: 'green'}}
                         >
                           X
                         </button>
@@ -207,6 +107,7 @@ const AddNewItems = () => (
                   type="button"
                   className="secondary"
                   onClick={() => push({ name: '', quantity: 0 })}
+                  style={{backgroundColor: 'green'}}
                 >
                   Add new item to your box
                 </button>

@@ -11,14 +11,20 @@ const TestFunction = () => {
     return <div className="container"> {DisplayHeader()}
     <h1>AVAILABLE ITEMS</h1>
     {freeItems.map(f => <div key={f._id.toString()} style={{backgroundColor: 'lightgreen'}}>{f.nameOfItem}
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <button type="submit" className="btn btn-primary" style={{backgroundColor: 'green'}} onClick={() => changeStatusItem(f._id, "booked")}>Book</button></div>)}
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="submit" className="btn btn-primary" style={{backgroundColor: 'green'}} onClick={() => changeStatusItem(f._id, "booked")}>Book</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="submit" className="btn btn-primary" style={{backgroundColor: 'green'}}>See on Map</button></div>)}
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
     <h1>BOOKED ITEMS</h1>
     {bookedItems.map(f => <div key={f._id.toString()} style={{backgroundColor: 'lightblue'}}>{f.nameOfItem}
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <button type="submit" className="btn btn-primary" style={{backgroundColor: 'blue'}} onClick={() => changeStatusItem(f._id, "taken")}>Collected</button></div>)}
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="submit" className="btn btn-primary" style={{backgroundColor: 'blue'}} onClick={() => changeStatusItem(f._id, "taken")}>Collected</button>
+    <button type="submit" className="btn btn-primary" style={{backgroundColor: 'blue'}}>See on Map</button></div>)}
+    &nbsp;&nbsp;&nbsp;&nbsp;
     {DisplayNearbyCentres()}
-    {DisplayLocation()}
+    &nbsp;&nbsp;&nbsp;&nbsp;
     </div>
 }
 
@@ -42,12 +48,4 @@ const DisplayNearbyCentres = () => {
     </div>
     </header>
   }
-
-const DisplayLocation = () => {
-    // const location = useQuery("getLocation") || "";
-    return <div><button id = "find-me">Show my location</button><br/>
-        <p id = "status"></p>
-        <a id = "map-link" target="_blank"></a>
-    </div>
-}
  
