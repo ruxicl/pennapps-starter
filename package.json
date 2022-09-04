@@ -8,9 +8,11 @@
   "dependencies": {
     "bootstrap": "^5.2.0",
     "convex": "latest",
+    "formik": "^2.2.9",
     "next": "latest",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/node": "~16.11.12",

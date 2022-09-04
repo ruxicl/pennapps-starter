@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.css'
+import "./formik-demo.css";
 
 import { ConvexProvider, ConvexReactClient } from 'convex/react'
 import clientConfig from "../convex/_generated/clientConfig";
