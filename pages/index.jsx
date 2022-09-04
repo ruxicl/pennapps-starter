@@ -21,12 +21,13 @@ const Home = () => {
 
     <div className="container">
       <p>
-      Here you can easily dispose of small objects ushc as lightbulbs, batteries or waterbottle!
-      Or you can make money by collecting them and bringing them to the closest recycling center.
+      We help you easily get rid of everything that you should not throw in the bin! Lightbulbs, batteries, broken appliances, and many more!
+      <br></br>
+      Or check out the map and help your neighbours get rid of their items! We'll direct you to the closest recycling centre!
       </p>
-        To test the website:
+        <b>How to do it?</b>
         <ul>
-          <li>Go to the <a href="/form"> "Drop Item" page</a> and fill out the form </li> 
+          <li>Go to the <a href="/form"> "Drop Item" page</a> and fill out the form with the items you want to get rid of </li> 
           <li>Go to the <a href="/pickup"> "Pickup" page</a> and see the item you just added! </li>
           <li>You can book any item on the list. Click "collected" when you collect the item(s).</li>
           </ul>

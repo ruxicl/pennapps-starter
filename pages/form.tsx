@@ -120,15 +120,6 @@ const AddNewItems = (submitFreeItem) => (
             var lat = 0;
             var long = 0;
 
-            if (navigator.geolocation) {
-                  navigator.geolocation.getCurrentPosition(showPosition);
-            }
-              
-            function showPosition(position) {
-             lat =  position.coords.latitude;
-             long = position.coords.longitude;
-            }
-
             submitFreeItem(title, lat, long)}
         resetForm();
       }}

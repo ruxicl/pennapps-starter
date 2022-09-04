@@ -11,7 +11,7 @@ const TestFunction = () => {
     const changeStatusItem = useMutation("changeStatusItem")
 
     return <div className="container"> {DisplayHeader()}
-    <h1>AVAILABLE ITEMS</h1>
+    <h3>AVAILABLE ITEMS</h3>
     {freeItems.map(f => <div key={f._id.toString()} style={{backgroundColor: 'lightgreen'}}>{f.nameOfItem} at: {f.address}
     &nbsp;&nbsp;&nbsp;&nbsp;
     <button type="submit" className="btn btn-primary" style={{backgroundColor: 'green'}} onClick={() => changeStatusItem(f._id, "booked")}>Book</button>
@@ -19,7 +19,7 @@ const TestFunction = () => {
     <button type="submit" className="btn btn-primary" style={{backgroundColor: 'green'}}>See on Map</button></div>)}
 
     &nbsp;&nbsp;&nbsp;&nbsp;
-    <h1>BOOKED ITEMS</h1>
+    <h3>BOOKED ITEMS</h3>
     {bookedItems.map(f => <div key={f._id.toString()} style={{backgroundColor: 'lightblue'}}>{f.nameOfItem}
     &nbsp;&nbsp;&nbsp;&nbsp;
     <button type="submit" className="btn btn-primary" style={{backgroundColor: 'blue'}} onClick={() => changeStatusItem(f._id, "taken")}>Collected</button>
@@ -44,10 +44,15 @@ export default TestFunction
 const DisplayNearbyCentres = () => {
     return <header>
         <div className="pt-30 pb-30 bg-light lh-40 text-center navigation_8">
-            <h1 className="mb-3"> Closest Recycling Centre</h1>
-            <p className="mb-3"> Enter your address and we will find the closes recycling centre for you to drop of the items you collected</p>
-            <p className="mb-3"> We will not store your address for any other purposes</p>
+            <h3 align="left" className="mb-3"> Closest Recycling Centre</h3>
+            <p align="left" className="mb-3"> Allow the browser to locate you in order to find the nearest centre</p>
+            <p align="left" className="mb-3"> We will not store your address for any other purposes</p>
+        
+        <p><b>The closest centre to you is:&nbsp;&nbsp;</b>
+        <a href="https://dc.seas.upenn.edu/green-team/recycling-options">Penn Engineering Recycling Centre</a>
+        </p>
         </div>
+
     </header>
 }
 
