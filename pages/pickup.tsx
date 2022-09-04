@@ -11,8 +11,8 @@ const TestFunction = () => {
     const changeStatusItem = useMutation("changeStatusItem")
 
     return <div className="container"> {DisplayHeader()}
-    <h3>AVAILABLE ITEMS</h3>
-    {freeItems.map(f => <div key={f._id.toString()} style={{backgroundColor: 'lightgreen'}}>{f.nameOfItem} at: {f.address}
+    <h1>AVAILABLE ITEMS</h1>
+    {freeItems.map(f => <div key={f._id.toString()} style={{backgroundColor: 'lightgreen'}}>{f.nameOfItem}
     &nbsp;&nbsp;&nbsp;&nbsp;
     <button type="submit" className="btn btn-primary" style={{backgroundColor: 'green'}} onClick={() => changeStatusItem(f._id, "booked")}>Book</button>
     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -33,7 +33,7 @@ const TestFunction = () => {
 const DisplayHeader = () => {
     return <header>
         <div className="pt-30 pb-30 bg-light lh-40 text-center navigation_8">
-            <h1 className="mb-3">Pickup</h1>
+            <h1 className="mb-3" >Pickup</h1>
             <h4 className="mb-3">See all the objects that you can collect</h4>
         </div>
     </header>
