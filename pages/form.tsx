@@ -12,15 +12,13 @@ const TestFunction = () => {
     }
 
     return <div> {DisplayHeader()}
-    <div><h1>hello</h1>
     <a className="btn btn-primary" onClick={miniFunction} role="button" style={{backgroundColor: 'green'}}>Submit Form</a>
-    {freeItems.map(f => <div className="bs-button" key={f._id.toString()} style={{backgroundColor: 'lightgreen'}}>{f.nameOfItem}</div>)}
-    </div></div>
+    </div>
 }
 
 const DisplayHeader = () => {
     return <header>
-    <div className="p-5 text-center bg-light">
+    <div className="pt-30 pb-30 bg-light lh-40 text-center navigation_8">
         <h1 className="mb-3">DROP</h1>
         <h4 className="mb-3">Fill out the form below with the info about the item you want to dispose of!</h4>
     </div>
