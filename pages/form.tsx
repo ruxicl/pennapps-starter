@@ -102,7 +102,7 @@ const SignupForm = () => {
       <input
         id="location"
         name="location"
-        type="number"
+        type="text"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.location}
@@ -134,8 +134,8 @@ const SignupForm = () => {
 const initialValues = {
   items: [
     {
-      item: '',
-      quantity: ''
+      name: '',
+      quantity: 0,
     },
   ],
 };
@@ -159,18 +159,19 @@ const AddNewItems = () => (
                   values.items.map((item, index) => (
                     <div className="row" key={index}>
                       <div className="col">
-                        <label htmlFor={`items.${index}.item`}>Item</label>
-                        <Field component="select" name={`items.${index}`}>
-                            <option value="lightbulbs">Lightbulbs</option>
+                        <label htmlFor={`items.${index}.name`}>Item</label>
+                        <Field component="select" name={`items.${index}.name`}>
+                            <option value=""></option>
                             <option value="batteries">Batteries</option>
+                            <option value="lightbulbs">Lightbulbs</option>
                             <option value="smartphones">Smartphones</option>
                             <option value="laptops">Laptops</option>
                             <option value="appliances">Appliancess</option>
-                          placeholder="lightbulb"
+                          placeholder="Choose the item"
                           type="text"
                         </Field>
                         <ErrorMessage
-                          name={`items.${index}.item`}
+                          name={`items.${index}.name`}
                           component="div"
                           className="field-error"
                         />
@@ -179,11 +180,11 @@ const AddNewItems = () => (
                         <label htmlFor={`items.${index}.quantity`}>Quantity</label>
                         <Field
                           name={`items.${index}.quantity`}
-                          placeholder="5"
+                          placeholder="Insert"
                           type="number"
                         />
                         <ErrorMessage
-                          name={`items.${index}.quantity`}
+                          name={`items.${index}.name`}
                           component="div"
                           className="field-error"
                         />
@@ -202,7 +203,7 @@ const AddNewItems = () => (
                 <button
                   type="button"
                   className="secondary"
-                  onClick={() => push({ item: '', quantity: 0 })}
+                  onClick={() => push({ name: '', quantity: 0 })}
                 >
                   Add new item to your box
                 </button>
