@@ -54,7 +54,7 @@ const SignupForm = () => {
 
   return (
     <div className="container">
-      <p align="left"> Add the items you want to dispose of and the corresponding quantities</p>
+      <p> Add the items you want to dispose of and the corresponding quantities</p>
     <form onSubmit={formik.handleSubmit}>
 
       <label htmlFor="location" style={{"width" : "150px"}}>Address</label>
