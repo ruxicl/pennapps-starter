@@ -20,7 +20,6 @@ const DisplayHeader = () => {
   return <header>
     <div className="pt-30 pb-30 bg-light lh-40 text-center navigation_8">
       <h1 className="mb-3">DROP</h1>
-      <h4 className="mb-3">Fill out the form below with the info about the item you want to dispose of!</h4>
     </div>
   </header>
 }
@@ -59,47 +58,10 @@ const SignupForm = () => {
 
   return (
     <div className="container">
+      <p align="left"> Add the items you want to dispose of and the corresponding quantities</p>
     <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="boxDescription">Box description</label>
-      <input
-        id="boxDescription"
-        name="boxDescription"
-        type="text"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.boxDescription}
-      />
-      {formik.touched.boxDescription && formik.errors.boxDescription ? (
-        <div>{formik.errors.boxDescription}</div>
-      ) : null}
 
-      <label htmlFor="nrOfLightbulbs">Number of lightbulbs</label>
-      <input
-        id="nrOfLightbulbs"
-        name="nrOfLightbulbs"
-        type="number"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.nrOfLightbulbs}
-      />
-      {formik.touched.nrOfLightbulbs && formik.errors.nrOfLightbulbs ? (
-        <div>{formik.errors.nrOfLightbulbs}</div>
-      ) : null}
-
-    <label htmlFor="nrOfBatteries">Number of batteries</label>
-      <input
-        id="nrOfBatteries"
-        name="nrOfBatteries"
-        type="number"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.nrOfBatteries}
-      />
-      {formik.touched.nrOfBatteries && formik.errors.nrOfBatteries ? (
-        <div>{formik.errors.nrOfBatteries}</div>
-      ) : null}
-
-      <label htmlFor="location">Location</label>
+      <label htmlFor="location" style={{"width" : "150px"}}>Address</label>
       <input
         id="location"
         name="location"
@@ -112,7 +74,10 @@ const SignupForm = () => {
         <div>{formik.errors.location}</div>
       ) : null}
 
-      <label htmlFor="email">Email Address</label>
+    <br></br>
+    <br></br>
+
+      <label htmlFor="email" style={{"width" : "150px"}}>Email Address</label>
       <input
         id="email"
         name="email"
@@ -125,7 +90,8 @@ const SignupForm = () => {
         <div>{formik.errors.email}</div>
       ) : null}
 
-      <button type="submit" className="btn btn-primary" style={{backgroundColor: 'green'}}>Submit</button>
+    <br></br>
+    <br></br>
     </form>
     </div>
   );
@@ -142,8 +108,7 @@ const initialValues = {
 };
 
 const AddNewItems = () => (
-  <div>
-    <p>Add the items you want to dispose of and the corresponding quantities</p>
+  <div className="container">
     <Formik
       initialValues={initialValues}
       onSubmit={async (values) => {
@@ -162,8 +127,8 @@ const AddNewItems = () => (
                   values.items.map((item, index) => (
                     <div className="row" key={index}>
                       <div className="col">
-                        <label htmlFor={`items.${index}.name`}>Item</label>
-                        <Field component="select" name={`items.${index}.name`}>
+                        <label htmlFor={`items.${index}.name`} style={{"width" : "150px"}}>Item</label>
+                        <Field component="select" name={`items.${index}.name`} style={{"width" : "150px", "height" : "27px"}}>
                             <option value=""></option>
                             <option value="batteries">Batteries</option>
                             <option value="lightbulbs">Lightbulbs</option>
@@ -180,7 +145,7 @@ const AddNewItems = () => (
                         />
                       </div>
                       <div className="col">
-                        <label htmlFor={`items.${index}.quantity`}>Quantity</label>
+                        <label htmlFor={`items.${index}.quantity`} style={{"width" : "150px", "height" : "20px"}}>Quantity</label>
                         <Field
                           name={`items.${index}.quantity`}
                           placeholder="Insert"
@@ -195,6 +160,7 @@ const AddNewItems = () => (
                       <div className="col">
                         <button
                           type="button"
+                          style={{"width" : "35px", "height" : "35px"}}
                           className="secondary"
                           onClick={() => remove(index)}
                         >
@@ -205,10 +171,11 @@ const AddNewItems = () => (
                   ))}
                 <button
                   type="button"
+                  style={{"width" : "70px", "height" : "65px"}}
                   className="secondary"
                   onClick={() => push({ name: '', quantity: 0 })}
                 >
-                  Add new item to your box
+                  Add item
                 </button>
               </div>
             )}
