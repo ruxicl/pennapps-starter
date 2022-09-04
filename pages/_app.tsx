@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }: any) {
 
       <ul className="nav nav-pills">
         <li className="nav-item"><a className="nav-link" aria-current="page" href="/">Home</a></li>
-        <li className="nav-item"><a className="nav-link" href="/form">DropItem</a></li>
+        <li className="nav-item"><a className="nav-link" href="/form">Drop Item</a></li>
         <li className="nav-item"><a className="nav-link" href="/pickup">Pickup</a></li>
       </ul>
     </header>
