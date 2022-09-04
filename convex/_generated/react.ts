@@ -9,6 +9,8 @@
  * @module
  */
 
+import type changeStatusItem from "../changeStatusItem";
+import type getBookedItems from "../getBookedItems";
 import type getCounter from "../getCounter";
 import type getFreeItems from "../getFreeItems";
 import type incrementCounter from "../incrementCounter";
@@ -29,11 +31,13 @@ import type { ClientMutation, ClientQuery } from "convex/server";
  */
 export type ConvexAPI = {
   queries: {
+    getBookedItems: ClientQuery<typeof getBookedItems>;
     getCounter: ClientQuery<typeof getCounter>;
     getFreeItems: ClientQuery<typeof getFreeItems>;
     listMessages: ClientQuery<typeof listMessages>;
   };
   mutations: {
+    changeStatusItem: ClientMutation<typeof changeStatusItem>;
     incrementCounter: ClientMutation<typeof incrementCounter>;
     sendMessage: ClientMutation<typeof sendMessage>;
     submitFreeItem: ClientMutation<typeof submitFreeItem>;

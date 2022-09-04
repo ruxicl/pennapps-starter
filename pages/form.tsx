@@ -30,7 +30,7 @@ const SignupForm = () => {
   const formik = useFormik({
     initialValues: {
       boxDescription: '',
-      location: '',
+      location: 0,
       email: '',
     },
     validationSchema: Yup.object({
@@ -68,7 +68,7 @@ const SignupForm = () => {
       <input
         id="location"
         name="location"
-        type="text"
+        type="number"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.location}
