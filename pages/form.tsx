@@ -3,6 +3,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
+import { map } from "lodash";
 
 const TestFunction = () => {
     const freeItems = useQuery("getFreeItems") || [];
@@ -147,7 +148,9 @@ const AddNewItems = () => (
       initialValues={initialValues}
       onSubmit={async (values) => {
         await new Promise((r) => setTimeout(r, 500));
-        alert(JSON.stringify(values, null, 2));
+        var title = '';
+        map(values["items"], p => title = title + "| " + p["item"] + ": " + p["quantity"] + " ")
+        alert(title)
       }}
     >
       {({ values }) => (
@@ -209,7 +212,7 @@ const AddNewItems = () => (
               </div>
             )}
           </FieldArray>
-          <button type="submit">Done</button>
+          <button type="submit" className="btn btn-primary" style={{backgroundColor: 'green'}}>Done</button>
         </Form>
       )}
     </Formik>
