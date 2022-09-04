@@ -11,6 +11,7 @@
 
 import type getCounter from "../getCounter";
 import type getFreeItems from "../getFreeItems";
+import type getLocation from "../getLocation";
 import type incrementCounter from "../incrementCounter";
 import type listMessages from "../listMessages";
 import type sendMessage from "../sendMessage";
@@ -31,6 +32,7 @@ export type ConvexAPI = {
   queries: {
     getCounter: ClientQuery<typeof getCounter>;
     getFreeItems: ClientQuery<typeof getFreeItems>;
+    getLocation: ClientQuery<typeof getLocation>;
     listMessages: ClientQuery<typeof listMessages>;
   };
   mutations: {

@@ -8,6 +8,7 @@ const TestFunction = () => {
     <div>
     {freeItems.map(f => <div className="bs-button" key={f._id.toString()} style={{backgroundColor: 'lightgreen'}}>{f.nameOfItem}</div>)}
     {DisplayNearbyCentres()}
+    {DisplayLocation()}
     </div></div>
 }
 
@@ -31,3 +32,12 @@ const DisplayNearbyCentres = () => {
     </div>
     </header>
   }
+
+const DisplayLocation = () => {
+    // const location = useQuery("getLocation") || "";
+    return <div><button id = "find-me">Show my location</button><br/>
+        <p id = "status"></p>
+        <a id = "map-link" target="_blank"></a>
+    </div>
+}
+ 

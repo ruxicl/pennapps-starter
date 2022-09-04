@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "../convex/_generated/react"
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
 
 const TestFunction = () => {
     const freeItems = useQuery("getFreeItems") || [];
@@ -10,6 +11,7 @@ const TestFunction = () => {
 
     return <div> {DisplayHeader()}
     {form}
+    {AddNewItems()}
     </div>
 }
 
@@ -127,3 +129,89 @@ const SignupForm = () => {
     </div>
   );
 };
+
+
+const initialValues = {
+  items: [
+    {
+      item: '',
+      quantity: ''
+    },
+  ],
+};
+
+const AddNewItems = () => (
+  <div>
+    <p>Add the items you want to dispose of and the corresponding quantities</p>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={async (values) => {
+        await new Promise((r) => setTimeout(r, 500));
+        alert(JSON.stringify(values, null, 2));
+      }}
+    >
+      {({ values }) => (
+        <Form>
+          <FieldArray name="items">
+            {({ insert, remove, push }) => (
+              <div>
+                {values.items.length > 0 &&
+                  values.items.map((item, index) => (
+                    <div className="row" key={index}>
+                      <div className="col">
+                        <label htmlFor={`items.${index}.item`}>Item</label>
+                        <Field component="select" name={`items.${index}`}>
+                            <option value="lightbulbs">Lightbulbs</option>
+                            <option value="batteries">Batteries</option>
+                            <option value="smartphones">Smartphones</option>
+                            <option value="laptops">Laptops</option>
+                            <option value="appliances">Appliancess</option>
+                          placeholder="lightbulb"
+                          type="text"
+                        </Field>
+                        <ErrorMessage
+                          name={`items.${index}.item`}
+                          component="div"
+                          className="field-error"
+                        />
+                      </div>
+                      <div className="col">
+                        <label htmlFor={`items.${index}.quantity`}>Quantity</label>
+                        <Field
+                          name={`items.${index}.quantity`}
+                          placeholder="5"
+                          type="number"
+                        />
+                        <ErrorMessage
+                          name={`items.${index}.quantity`}
+                          component="div"
+                          className="field-error"
+                        />
+                      </div>
+                      <div className="col">
+                        <button
+                          type="button"
+                          className="secondary"
+                          onClick={() => remove(index)}
+                        >
+                          X
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                <button
+                  type="button"
+                  className="secondary"
+                  onClick={() => push({ item: '', quantity: 0 })}
+                >
+                  Add new item to your box
+                </button>
+              </div>
+            )}
+          </FieldArray>
+          <button type="submit">Done</button>
+        </Form>
+      )}
+    </Formik>
+  </div>
+);
