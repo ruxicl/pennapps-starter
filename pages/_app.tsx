@@ -24,9 +24,9 @@ function MyApp({ Component, pageProps }: any) {
       </a>
 
       <ul className="nav nav-pills">
-        <li className="nav-item"><a className="nav-link" aria-current="page" href="/">Home</a></li>
-        <li className="nav-item"><a className="nav-link" href="/form">Drop Item</a></li>
-        <li className="nav-item"><a className="nav-link" href="/pickup">Pickup</a></li>
+        <li className="nav-item"><a className="nav-link" style={{color: 'green'}} aria-current="page" href="/">Home</a></li>
+        <li className="nav-item"><a className="nav-link" style={{color: 'green'}} href="/form">Drop Item</a></li>
+        <li className="nav-item"><a className="nav-link" style={{color: 'green'}} href="/pickup">Pickup</a></li>
       </ul>
     </header>
   </div>

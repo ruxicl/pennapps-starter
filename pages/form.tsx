@@ -6,13 +6,10 @@ import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
 import { map } from "lodash";
 
 const TestFunction = () => {
-    const freeItems = useQuery("getFreeItems") || [];
-    const header = DisplayHeader();
-    const form = SignupForm();
+    const submitFreeItem = useMutation("submitFreeItem")
 
     return <div> {DisplayHeader()}
-    {form}
-    {AddNewItems()}
+    {AddNewItems(submitFreeItem)}
     </div>
 }
 
@@ -33,8 +30,6 @@ const SignupForm = () => {
     initialValues: {
       boxDescription: '',
       location: '',
-      nrOfLightbulbs: 0,
-      nrOfBatteries: 0,
       email: '',
     },
     validationSchema: Yup.object({
@@ -51,7 +46,7 @@ const SignupForm = () => {
       email: Yup.string().email('Invalid email address'),
     }),
     onSubmit: values => {
-        submitFreeItem(values.boxDescription, values.location, values.nrOfLightbulbs, values.email)
+        submitFreeItem(values.boxDescription, values.location, values.email)
         formik.resetForm();
     },
   });
@@ -107,15 +102,21 @@ const initialValues = {
   ],
 };
 
-const AddNewItems = () => (
-  <div className="container">
+const AddNewItems = (submitFreeItem) => (
+    
+<div className="container">
+    <p>Add the items you want to dispose of and the corresponding quantities</p>
     <Formik
       initialValues={initialValues}
-      onSubmit={async (values) => {
+      onSubmit={async (values, { resetForm }) => {
+        
         await new Promise((r) => setTimeout(r, 500));
-        var title = '';
-        map(values["items"], p => title = title + "| " + p["name"] + ": " + p["quantity"] + " ")
-        alert(title)
+        var title = 'Box with: ';
+        map(values["items"], p => {if (p["quantity"]>0 && p["name"]!="") { title = title + p["quantity"] + " " + p["name"] + ","}})
+        title = title.substring(0, title.length - 1);
+
+        if (title != 'Box with:') {submitFreeItem(title, 2, 2)}
+        resetForm();
       }}
     >
       {({ values }) => (
@@ -128,6 +129,7 @@ const AddNewItems = () => (
                     <div className="row" key={index}>
                       <div className="col">
                         <label htmlFor={`items.${index}.name`} style={{"width" : "150px"}}>Item</label>
+                        &nbsp;&nbsp;
                         <Field component="select" name={`items.${index}.name`} style={{"width" : "150px", "height" : "27px"}}>
                             <option value=""></option>
                             <option value="batteries">Batteries</option>
@@ -135,7 +137,7 @@ const AddNewItems = () => (
                             <option value="smartphones">Smartphones</option>
                             <option value="laptops">Laptops</option>
                             <option value="appliances">Appliancess</option>
-                          placeholder="Choose the item"
+                          placeholder="Choose the item "
                           type="text"
                         </Field>
                         <ErrorMessage
@@ -146,6 +148,7 @@ const AddNewItems = () => (
                       </div>
                       <div className="col">
                         <label htmlFor={`items.${index}.quantity`} style={{"width" : "150px", "height" : "20px"}}>Quantity</label>
+                        &nbsp;&nbsp;
                         <Field
                           name={`items.${index}.quantity`}
                           placeholder="Insert"
@@ -160,7 +163,7 @@ const AddNewItems = () => (
                       <div className="col">
                         <button
                           type="button"
-                          style={{"width" : "35px", "height" : "35px"}}
+                          style={{"width" : "35px", "height" : "35px", backgroundColor: 'green'}}
                           className="secondary"
                           onClick={() => remove(index)}
                         >
@@ -171,7 +174,7 @@ const AddNewItems = () => (
                   ))}
                 <button
                   type="button"
-                  style={{"width" : "70px", "height" : "65px"}}
+                  style={{"width" : "70px", "height" : "65px", backgroundColor: 'green'}}
                   className="secondary"
                   onClick={() => push({ name: '', quantity: 0 })}
                 >
