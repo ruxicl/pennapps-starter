@@ -46,9 +46,9 @@ export default TestFunction
 const DisplayNearbyCentres = () => {
     return <header>
         <div className="pt-30 pb-30 bg-light lh-40 text-center navigation_8">
-            <h3 align="left" className="mb-3"> Closest Recycling Centre</h3>
-            <p align="left" className="mb-3"> Allow the browser to locate you in order to find the nearest centre</p>
-            <p align="left" className="mb-3"> We will not store your address for any other purposes</p>
+            <h3 className="mb-3"> Closest Recycling Centre</h3>
+            <p className="mb-3"> Allow the browser to locate you in order to find the nearest centre</p>
+            <p className="mb-3"> We will not store your address for any other purposes</p>
         
         <p><b>The closest centre to you is:&nbsp;&nbsp;</b>
         <a href="https://dc.seas.upenn.edu/green-team/recycling-options">Penn Engineering Recycling Centre</a>
@@ -59,16 +59,6 @@ const DisplayNearbyCentres = () => {
 }
 
 const DisplayLocation = () => {
-    if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
-        } else { 
-          return "Geolocation is not supported by this browser.";
-        }
-      
-      function showPosition(position) {
-        return "Latitude: " + position.coords.latitude + 
-        "<br>Longitude: " + position.coords.longitude;
-      }
 }
 
 const DisplayCentresList = () => {
