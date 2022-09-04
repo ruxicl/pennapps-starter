@@ -149,7 +149,7 @@ const AddNewItems = () => (
       onSubmit={async (values) => {
         await new Promise((r) => setTimeout(r, 500));
         var title = '';
-        map(values["items"], p => title = title + "| " + p["item"] + ": " + p["quantity"] + " ")
+        map(values["items"], p => title = title + "| " + p["name"] + ": " + p["quantity"] + " ")
         alert(title)
       }}
     >
