@@ -25,7 +25,9 @@ const TestFunction = () => {
     <button type="submit" className="btn btn-primary" style={{backgroundColor: 'blue'}} onClick={() => changeStatusItem(f._id, "taken")}>Collected</button>
     <button type="submit" className="btn btn-primary" style={{backgroundColor: 'blue'}}>See on Map</button></div>)}
     &nbsp;&nbsp;&nbsp;&nbsp;
+    {DisplayLocation()}
     {DisplayNearbyCentres()}
+
     &nbsp;&nbsp;&nbsp;&nbsp;
     </div>
 }
@@ -57,11 +59,16 @@ const DisplayNearbyCentres = () => {
 }
 
 const DisplayLocation = () => {
-    // const location = useQuery("getLocation") || "";
-    return <div><button id = "find-me">Show my location</button><br/>
-        <p id = "status"></p>
-        <a id = "map-link" target="_blank"></a>
-    </div>
+    if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+          return "Geolocation is not supported by this browser.";
+        }
+      
+      function showPosition(position) {
+        return "Latitude: " + position.coords.latitude + 
+        "<br>Longitude: " + position.coords.longitude;
+      }
 }
 
 const DisplayCentresList = () => {
