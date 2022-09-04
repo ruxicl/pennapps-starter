@@ -16,8 +16,8 @@ const TestFunction = () => {
 
 const DisplayHeader = () => {
   return <header>
-    <div className="pt-30 pb-30 bg-light lh-40 text-center navigation_8">
-      <h1 className="mb-3">DROP</h1>
+    <div className="pt-30 pb-30 bg-light lh-40 text-center navigation_8" >
+      <h1 className="mb-3" >DROP</h1>
     </div>
   </header>
 }
