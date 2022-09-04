@@ -31,6 +31,8 @@ const SignupForm = () => {
     initialValues: {
       boxDescription: '',
       location: '',
+      nrOfLightbulbs: 0,
+      nrOfBatteries: 0,
       email: '',
     },
     validationSchema: Yup.object({
@@ -40,10 +42,14 @@ const SignupForm = () => {
       location: Yup.string()
         .max(20, 'Must be 20 characters or less')
         .required('Required'),
+      nrOfLightbulbs: Yup.string()
+        .max(50, 'Sorry, you reached the maximum number'),
+      nrOfBatteries: Yup.string()
+        .max(50, 'Sorry, you reached the maximum number'),
       email: Yup.string().email('Invalid email address'),
     }),
     onSubmit: values => {
-        submitFreeItem(values.boxDescription, values.location, values.email)
+        submitFreeItem(values.boxDescription, values.location, values.nrOfLightbulbs, values.email)
         formik.resetForm();
     },
   });
@@ -62,6 +68,32 @@ const SignupForm = () => {
       />
       {formik.touched.boxDescription && formik.errors.boxDescription ? (
         <div>{formik.errors.boxDescription}</div>
+      ) : null}
+
+      <label htmlFor="nrOfLightbulbs">Number of lightbulbs</label>
+      <input
+        id="nrOfLightbulbs"
+        name="nrOfLightbulbs"
+        type="number"
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.nrOfLightbulbs}
+      />
+      {formik.touched.nrOfLightbulbs && formik.errors.nrOfLightbulbs ? (
+        <div>{formik.errors.nrOfLightbulbs}</div>
+      ) : null}
+
+    <label htmlFor="nrOfBatteries">Number of batteries</label>
+      <input
+        id="nrOfBatteries"
+        name="nrOfBatteries"
+        type="number"
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.nrOfBatteries}
+      />
+      {formik.touched.nrOfBatteries && formik.errors.nrOfBatteries ? (
+        <div>{formik.errors.nrOfBatteries}</div>
       ) : null}
 
       <label htmlFor="location">Location</label>
