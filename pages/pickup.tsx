@@ -1,3 +1,4 @@
+import { last } from "lodash";
 import { unstable_UserBlockingPriority } from "scheduler";
 import { useMutation, useQuery } from "../convex/_generated/react"
 
@@ -10,7 +11,7 @@ const TestFunction = () => {
 
     return <div className="container"> {DisplayHeader()}
     <h1>AVAILABLE ITEMS</h1>
-    {freeItems.map(f => <div key={f._id.toString()} style={{backgroundColor: 'lightgreen'}}>{f.nameOfItem}
+    {freeItems.map(f => <div key={f._id.toString()} style={{backgroundColor: 'lightgreen'}}>{f.nameOfItem} at: {f.address}
     &nbsp;&nbsp;&nbsp;&nbsp;
     <button type="submit" className="btn btn-primary" style={{backgroundColor: 'green'}} onClick={() => changeStatusItem(f._id, "booked")}>Book</button>
     &nbsp;&nbsp;&nbsp;&nbsp;

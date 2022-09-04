@@ -13,7 +13,7 @@ export default defineSchema({
 
   freeItems: defineTable({
     nameOfItem: s.string(),
-    latitude: s.number(),
+    address: s.string(),
     longitude: s.number(),
     status: s.string()
   })

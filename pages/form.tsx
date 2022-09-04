@@ -46,7 +46,20 @@ const AddNewItems = (submitFreeItem) => (
         map(values["items"], p => {if (p["quantity"]>0 && p["name"]!="") { title = title + p["quantity"] + " " + p["name"] + ","}})
         title = title.substring(0, title.length - 1);
 
-        if (title != 'Box with:') {submitFreeItem(title, 2, 2)}
+        if (title != 'Box with:') {
+            var lat = 0;
+            var long = 0;
+
+            if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(showPosition);
+            }
+              
+            function showPosition(position) {
+             lat =  position.coords.latitude;
+             long = position.coords.longitude;
+            }
+
+            submitFreeItem(title, lat, long)}
         resetForm();
       }}
     >
