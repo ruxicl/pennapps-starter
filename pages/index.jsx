@@ -14,29 +14,25 @@ const Home = () => {
 
       <header>
     <div className="p-5 text-center bg-light">
-        <h1 className="mb-3">WELCOME TO ....</h1>
+        <h1 className="mb-3">WELCOME TO LAZY DISPOSAL</h1>
         <h4 className="mb-3">Do little things and save the world!</h4>
     </div>
     </header>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js</a> with{' '}
-          <a href="https://convex.dev">Convex</a>
-        </h1>
+    <div className="container">
+      <p>
+      Here you can easily dispose of small objects ushc as lightbulbs, batteries or waterbottle!
+      Or you can make money by collecting them and bringing them to the closest recycling center.
+      </p>
+      <p>
+        To test the website:
         <ul>
-          <li>
-            <Link href="/chat">
-              <a>chat</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/counter">
-              <a>counter</a>
-            </Link>
-          </li>
-        </ul>
-      </main>
+          <li>Go to the <a href="/form"> "Drop Item" page</a> and fill out the form </li> 
+          <li>Go to the <a href="/pickup"> "Pickup" page</a>and see the item you just added! </li>
+          <li>You can book any item on the list. Click "collected" when you collect the item(s).</li>
+          </ul>
+      </p>
+    </div>
 
       <footer className={styles.footer}>
         <a

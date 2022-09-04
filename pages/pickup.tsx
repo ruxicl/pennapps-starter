@@ -1,15 +1,25 @@
+import { unstable_UserBlockingPriority } from "scheduler";
 import { useMutation, useQuery } from "../convex/_generated/react"
 
 const TestFunction = () => {
 
     const freeItems = useQuery("getFreeItems") || [];
+    const bookedItems = useQuery("getBookedItems") || [];
+
+    const changeStatusItem = useMutation("changeStatusItem")
 
     return <div className="container"> {DisplayHeader()}
-    <div>
-    {freeItems.map(f => <div className="bs-button" key={f._id.toString()} style={{backgroundColor: 'lightgreen'}}>{f.nameOfItem}</div>)}
+    <h1>AVAILABLE ITEMS</h1>
+    {freeItems.map(f => <div key={f._id.toString()} style={{backgroundColor: 'lightgreen'}}>{f.nameOfItem}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="submit" className="btn btn-primary" style={{backgroundColor: 'green'}} onClick={() => changeStatusItem(f._id, "booked")}>Book</button></div>)}
+    <h1>BOOKED ITEMS</h1>
+    {bookedItems.map(f => <div key={f._id.toString()} style={{backgroundColor: 'lightblue'}}>{f.nameOfItem}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="submit" className="btn btn-primary" style={{backgroundColor: 'blue'}} onClick={() => changeStatusItem(f._id, "taken")}>Collected</button></div>)}
     {DisplayNearbyCentres()}
     {DisplayLocation()}
-    </div></div>
+    </div>
 }
 
 const DisplayHeader = () => {

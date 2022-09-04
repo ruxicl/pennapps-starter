@@ -15,6 +15,7 @@ export default defineSchema({
     nameOfItem: s.string(),
     latitude: s.number(),
     longitude: s.number(),
+    status: s.string()
   })
 
 });
