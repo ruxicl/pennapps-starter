@@ -30,3 +30,13 @@ const DisplayHeader = () => {
 }
 
 export default TestFunction
+
+const DisplayNearbyCentres = () => {
+    return <header>
+    <div className="pt-30 pb-30 bg-light lh-40 text-center navigation_8">
+        <h1 className="mb-3"> Closest Recycling Centre</h1>
+        <p className="mb-3"> Enter your address and we will find the closes recycling centre for you to drop of the items you collected</p>
+        <p className="mb-3"> We will not store your address for any other purposes</p>
+    </div>
+    </header>
+  }
