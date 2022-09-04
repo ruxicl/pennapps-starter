@@ -9,6 +9,7 @@ const TestFunction = () => {
     const submitFreeItem = useMutation("submitFreeItem")
 
     return <div> {DisplayHeader()}
+    {SignupForm()}
     {AddNewItems(submitFreeItem)}
     </div>
 }
